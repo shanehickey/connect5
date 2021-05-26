@@ -1,11 +1,11 @@
 import pytest
 from connect_server import (
-    NUM_ROWS,
     create_app,
+    FIRST_INDEX,
+    NUM_ROWS,
     NUM_TO_CONNECT,
     SYMBOL_1,
     SYMBOL_2,
-    FIRST_INDEX,
 )
 
 
