@@ -79,7 +79,7 @@ class Participants:
         self.player1 = None
         self.player2 = None
         self.active_player = None
-        
+
     def is_full(self):
         return self.player1 and self.player2
 
@@ -142,7 +142,7 @@ def create_app():
     def register_new_player():
         """Register a new player to the game using the user supplied name"""
         global participants
-        
+
         # If the board is still full from a previously won game then reset the game
         # before attempmting to add new players
         if check_for_winner()["winner"]:
@@ -152,7 +152,7 @@ def create_app():
             return {"success": False, "message": "Too many players"}
 
         # If there are less than 2 players but moves are on the board then also reset
-        # the game as something has gone wrong. 
+        # the game as something has gone wrong.
         if not _board_is_empty():
             reset_game()
 
@@ -187,7 +187,7 @@ def create_app():
             }
         else:
             return {"success": False, "active_player": False}
-            
+
     @app.route("/playerdetails", methods=["POST"])
     def initialise_player_details():
         """Assign the initial active player for the game and assign symbols to both players"""

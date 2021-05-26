@@ -55,7 +55,7 @@ class Client:
         req = self._make_get_request(reg_url)
         if "board" in req.json() and req.json()["board"]:
             print(req.json()["board"])
-        
+
     def join_game(self):
         """Attempt to join the game"""
         reg_url = CONNECT5_SERVER + "/register"

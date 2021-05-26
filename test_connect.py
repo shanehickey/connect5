@@ -1,5 +1,12 @@
 import pytest
-from connect_server import NUM_ROWS, create_app, NUM_TO_CONNECT, SYMBOL_1, SYMBOL_2, FIRST_INDEX
+from connect_server import (
+    NUM_ROWS,
+    create_app,
+    NUM_TO_CONNECT,
+    SYMBOL_1,
+    SYMBOL_2,
+    FIRST_INDEX,
+)
 
 
 @pytest.fixture
