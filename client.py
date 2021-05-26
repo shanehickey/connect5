@@ -116,7 +116,7 @@ class Client:
                 print(req.json()["reason"])
         return req.json()["winner"]
 
-    def check_for_winner(self):
+    def winner_exists(self):
         reg_url = CONNECT5_SERVER + "/winner"
         req = self._make_get_request(reg_url)
         return req.json()["winner"] if "winner" in req.json() else False
@@ -139,23 +139,23 @@ if __name__ == "__main__":
             client.set_symbol(player_details["symbol"])
 
             # While there is not a winner keep playing
-            while not client.check_for_winner():
+            while not client.winner_exists():
                 # While you are not the active player keep polling for your turn
                 while not client.is_active_player():
                     time.sleep(TURN_POLL_INTERVAL)
                     client.set_active_player(client.is_client_active_player())
 
                     # If there is a winner decided before you make your turn then you have lost
-                    if client.check_for_winner():
+                    if client.winner_exists():
                         client.print_board()
                         print(f"You lost. Commiserations {client.name}.")
                 # Now that it is your turn...
-                if not client.check_for_winner():
+                if not client.winner_exists():
                     client.print_board()
                     client.make_move()
 
                     # If there is a winner straight after your move then you have won
-                    if client.check_for_winner():
+                    if client.winner_exists():
                         client.print_board()
                         print(f"You won! Congratulations {client.name}.")
                     else:
