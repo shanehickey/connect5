@@ -70,10 +70,13 @@ class Participants:
     def add_player(self, player):
         if not self.get_player1():
             self.player1 = player
+            return True
         elif not self.get_player2():
             self.player2 = player
+            return True
         else:
             print("No room to add player")
+            return False
 
     def reset_participants(self):
         self.player1 = None
@@ -165,10 +168,8 @@ def create_app():
                 "message": "Name is already in use, please choose another",
             }
 
-        participants.add_player(Player(name))
-        participants.get_players_string()
         return {
-            "success": True,
+            "success": participants.add_player(Player(name)),
             "message": "Successfully joined, please await your turn",
         }
 
