@@ -189,7 +189,7 @@ def create_app():
         else:
             return {"success": False, "active_player": False}
 
-    @app.route("/playerdetails", methods=["POST"])
+    @app.route("/initdetails", methods=["POST"])
     def initialise_player_details():
         """Assign the initial active player for the game and assign symbols to both players"""
         while not participants.is_full():

@@ -75,7 +75,7 @@ class Client:
         return req.json()
 
     def initialise_player_details(self):
-        reg_url = CONNECT5_SERVER + "/playerdetails"
+        reg_url = CONNECT5_SERVER + "/initdetails"
         player_info = {"name": self.name}
         req = self._make_post_request(reg_url, player_info)
         self.symbol = req.json()["symbol"]
