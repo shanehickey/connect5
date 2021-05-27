@@ -132,8 +132,8 @@ if __name__ == "__main__":
         elif not response["success"]:
             print(response["message"])
         else:
-            # Client prompts the server to assign an active player. The last player who completes
-            # the server will successfully prompt the server into assigning which player goes first
+            # Client prompts the server to assign an initial active player (who goes first). At this
+            # point the client must wait for a second player
             player_details = client.initialise_player_details()
             client.set_active_player(player_details["active_player"])
             client.set_symbol(player_details["symbol"])
