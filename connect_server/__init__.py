@@ -116,7 +116,7 @@ class Participants:
             return False
 
 
-board = [[None for i in range(NUM_COLS)] for j in range(NUM_ROWS)]
+board = [[None for col in range(NUM_COLS)] for row in range(NUM_ROWS)]
 participants = Participants()
 
 
@@ -305,11 +305,11 @@ def create_app():
     def reset_game():
         global board
         global participants
-        board = [[None for i in range(NUM_COLS)] for j in range(NUM_ROWS)]
+        board = [[None for col in range(NUM_COLS)] for row in range(NUM_ROWS)]
         participants.reset_participants()
         return {"success": True, "message": "Game reset"}
 
     def _board_is_empty():
-        return board == [[None for i in range(NUM_COLS)] for j in range(NUM_ROWS)]
+        return board == [[None for col in range(NUM_COLS)] for row in range(NUM_ROWS)]
 
     return app
