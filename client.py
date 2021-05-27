@@ -154,10 +154,10 @@ if __name__ == "__main__":
                 if not client.winner_exists():
                     client.print_board()
                     client.make_move()
+                    client.print_board()
 
                     # If there is a winner straight after your move then you have won
                     if client.winner_exists():
-                        client.print_board()
                         print(f"You won! Congratulations {client.name}.")
                     else:
                         print("Please wait for your turn...")
