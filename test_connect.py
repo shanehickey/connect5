@@ -405,7 +405,7 @@ def test_26_invalid_downward_diagonal_win_broken_up(client):
     assert rv.json["winner"] == False
 
 
-def test_27_add_more_symbols_than_rows_available(client):
+def test_27_invalid_add_more_symbols_than_rows_available(client):
     move_data = {"column": FIRST_INDEX, "symbol": SYMBOL_1}
     for _ in range(NUM_ROWS):
         client.post("/makemove", json=move_data)
@@ -414,7 +414,7 @@ def test_27_add_more_symbols_than_rows_available(client):
     assert rv.json["success"] == False
 
 
-def test_28_add_1_player(client):
+def test_28_valid_add_1_player(client):
     rv = client.get("/reset")
     rv = client.get("/players")
     assert rv.json["players"] == "[None, None]"
@@ -423,7 +423,7 @@ def test_28_add_1_player(client):
     assert rv.json["players"] == "[a, None]"
 
 
-def test_29_add_2_players(client):
+def test_29_valid_add_2_players(client):
     rv = client.get("/reset")
     rv = client.get("/players")
     assert rv.json["players"] == "[None, None]"
@@ -433,7 +433,7 @@ def test_29_add_2_players(client):
     assert rv.json["players"] == "[a, b]"
 
 
-def test_30_add_3_players(client):
+def test_30_invalid_add_3_players(client):
     rv = client.get("/reset")
     rv = client.get("/players")
     assert rv.json["players"] == "[None, None]"
