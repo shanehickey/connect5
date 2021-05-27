@@ -149,7 +149,8 @@ if __name__ == "__main__":
                     if client.winner_exists():
                         client.print_board()
                         print(f"You lost. Commiserations {client.name}.")
-                # Now that it is your turn...
+                # If you have not lost then it now it is your turn. If you have lost, the client
+                # will exit the loop and the main function finishes
                 if not client.winner_exists():
                     client.print_board()
                     client.make_move()
