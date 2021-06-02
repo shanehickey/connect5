@@ -20,7 +20,6 @@ def client(scope="function"):
     client.get("/reset")
     client.post("/register", json={"name": "a"})
     client.post("/register", json={"name": "b"})
-    client.post("/playerdetails", json={"name": "a"})
 
 
 # Useful helper that is only printed in pytest when a test fails.
