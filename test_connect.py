@@ -254,64 +254,7 @@ def test_16_invalid_upward_diagonal_win_broken_up(client):
     assert rv.json["winner"] == False
 
 
-def test_17_valid_row_win(client):
-    rv = client.get("/winner")
-    assert rv.json["winner"] == False
-    for col in range(FIRST_INDEX, FIRST_INDEX + NUM_TO_CONNECT):
-        client.post("/makemove", json={"column": col, "symbol": SYMBOL_1})
-    print_board(client)
-    rv = client.get("/winner")
-    assert rv.json["winner"] == True
-
-
-def test_18_valid_row_win_leading_other(client):
-    rv = client.get("/winner")
-    assert rv.json["winner"] == False
-    client.post("/makemove", json={"column": FIRST_INDEX, "symbol": SYMBOL_2})
-    for col in range(FIRST_INDEX + 1, FIRST_INDEX + NUM_TO_CONNECT + 1):
-        client.post("/makemove", json={"column": col, "symbol": SYMBOL_1})
-    print_board(client)
-    rv = client.get("/winner")
-    assert rv.json["winner"] == True
-
-
-def test_19_valid_row_win_trailing_other(client):
-    rv = client.get("/winner")
-    assert rv.json["winner"] == False
-    for col in range(FIRST_INDEX, FIRST_INDEX + NUM_TO_CONNECT):
-        client.post("/makemove", json={"column": col, "symbol": SYMBOL_1})
-    client.post(
-        "/makemove",
-        json={"column": FIRST_INDEX + NUM_TO_CONNECT + 1, "symbol": SYMBOL_2},
-    )
-    print_board(client)
-    rv = client.get("/winner")
-    assert rv.json["winner"] == True
-
-
-def test_20_invalid_row_win_not_enough_symbols(client):
-    rv = client.get("/winner")
-    assert rv.json["winner"] == False
-    for col in range(FIRST_INDEX, FIRST_INDEX + NUM_TO_CONNECT - 1):
-        client.post("/makemove", json={"column": col, "symbol": SYMBOL_1})
-    print_board(client)
-    rv = client.get("/winner")
-    assert rv.json["winner"] == False
-
-
-def test_21_invalid_row_win_broken_up(client):
-    rv = client.get("/winner")
-    assert rv.json["winner"] == False
-    client.post("/makemove", json={"column": FIRST_INDEX, "symbol": SYMBOL_2})
-    client.post("/makemove", json={"column": FIRST_INDEX + 1, "symbol": SYMBOL_1})
-    for col in range(FIRST_INDEX + 2, FIRST_INDEX + NUM_TO_CONNECT + 1):
-        client.post("/makemove", json={"column": col, "symbol": SYMBOL_1})
-    print_board(client)
-    rv = client.get("/winner")
-    assert rv.json["winner"] == True
-
-
-def test_22_valid_downward_diagonal_win(client):
+def test_17_valid_downward_diagonal_win(client):
     rv = client.get("/winner")
     assert rv.json["winner"] == False
     i = NUM_TO_CONNECT - 1
@@ -325,7 +268,7 @@ def test_22_valid_downward_diagonal_win(client):
     assert rv.json["winner"] == True
 
 
-def test_23_valid_downward_diagonal_win_leading_other(client):
+def test_18_valid_downward_diagonal_win_leading_other(client):
     rv = client.get("/winner")
     assert rv.json["winner"] == False
 
@@ -348,7 +291,7 @@ def test_23_valid_downward_diagonal_win_leading_other(client):
     assert rv.json["winner"] == True
 
 
-def test_24_valid_downward_diagonal_win_trailing_other(client):
+def test_19_valid_downward_diagonal_win_trailing_other(client):
     rv = client.get("/winner")
     assert rv.json["winner"] == False
     # Ensure there is only one winner
@@ -368,7 +311,7 @@ def test_24_valid_downward_diagonal_win_trailing_other(client):
     assert rv.json["winner"] == True
 
 
-def test_25_invalid_downward_diagonal_win_not_enough_symbols(client):
+def test_20_invalid_downward_diagonal_win_not_enough_symbols(client):
     rv = client.get("/winner")
     assert rv.json["winner"] == False
     i = NUM_TO_CONNECT - 2
@@ -382,7 +325,7 @@ def test_25_invalid_downward_diagonal_win_not_enough_symbols(client):
     assert rv.json["winner"] == False
 
 
-def test_26_invalid_downward_diagonal_win_broken_up(client):
+def test_21_invalid_downward_diagonal_win_broken_up(client):
     rv = client.get("/winner")
     assert rv.json["winner"] == False
 
@@ -405,7 +348,7 @@ def test_26_invalid_downward_diagonal_win_broken_up(client):
     assert rv.json["winner"] == False
 
 
-def test_27_invalid_add_more_symbols_than_rows_available(client):
+def test_22_invalid_add_more_symbols_than_rows_available(client):
     move_data = {"column": FIRST_INDEX, "symbol": SYMBOL_1}
     for _ in range(NUM_ROWS):
         client.post("/makemove", json=move_data)
@@ -414,7 +357,7 @@ def test_27_invalid_add_more_symbols_than_rows_available(client):
     assert rv.json["success"] == False
 
 
-def test_28_valid_add_1_player(client):
+def test_23_valid_add_1_player(client):
     rv = client.get("/reset")
     rv = client.get("/players")
     assert rv.json["players"] == "[None, None]"
@@ -423,7 +366,7 @@ def test_28_valid_add_1_player(client):
     assert rv.json["players"] == "[a, None]"
 
 
-def test_29_valid_add_2_players(client):
+def test_24_valid_add_2_players(client):
     rv = client.get("/reset")
     rv = client.get("/players")
     assert rv.json["players"] == "[None, None]"
@@ -433,7 +376,7 @@ def test_29_valid_add_2_players(client):
     assert rv.json["players"] == "[a, b]"
 
 
-def test_30_invalid_add_3_players(client):
+def test_25_invalid_add_3_players(client):
     rv = client.get("/reset")
     rv = client.get("/players")
     assert rv.json["players"] == "[None, None]"
