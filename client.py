@@ -12,7 +12,6 @@ class Client:
     """Represents a single client used to partake in a game of Connect 5"""
 
     def __init__(self):
-        self.hostname = socket.gethostname()
         self.name = None
         self.symbol = ""
         self.active_player = False
